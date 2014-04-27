@@ -51,6 +51,9 @@ public class MainActivity extends Activity implements ViewPager.OnPageChangeList
 
 	/** Screen 1/3 width */
 	private int SCREEN_WIDTH_PART_ONE;
+	
+	/** Slide image scale X value */
+	private float mScaleX = 1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -73,6 +76,7 @@ public class MainActivity extends Activity implements ViewPager.OnPageChangeList
 		mSlide = (ImageView) findViewById(R.id.slide_img);
 		Matrix matrix = new Matrix();
 		float ff = (float) SCREEN_WIDTH_PART_ONE / (float) bitmap.getWidth();
+		this.mScaleX = ff;
 		matrix.postScale(ff, 1);
 		mSlide.setImageMatrix(matrix);
 
@@ -145,28 +149,52 @@ public class MainActivity extends Activity implements ViewPager.OnPageChangeList
 	@Override
 	public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
 	{
+		// Slide image 跟随Pager一起滑动方式
+		float to = -1;
+		if (position == mCurrentPage)
+		{
+			float len = positionOffset * SCREEN_WIDTH_PART_ONE;
+			float from = mCurrentPage * SCREEN_WIDTH_PART_ONE;
+			to = from + len;
+		} else if (position > mCurrentPage)
+		{
+			to = position * SCREEN_WIDTH_PART_ONE;
+		}
 
+		if (to >= 0)
+		{
+			Matrix matrix = new Matrix();
+			matrix.postScale(mScaleX, 1);
+			matrix.postTranslate(to, 0);
+			mSlide.setImageMatrix(matrix);
+		}
+
+		mCurrentPage = position;
+		
+		setPageTitleColor(mViewPager.getCurrentItem());
 	}
 
 	@Override
 	public void onPageSelected(int position)
 	{
-		int from = mCurrentPage * SCREEN_WIDTH_PART_ONE;
-		int to = mCurrentPage * SCREEN_WIDTH_PART_ONE;
-		if ((position - mCurrentPage) > 0)
-		{
-			to += SCREEN_WIDTH_PART_ONE;
-		} else
-		{
-			to -= SCREEN_WIDTH_PART_ONE;
-		}
-		Animation animation = new TranslateAnimation(from, to, 0, 0);
-		mCurrentPage = position;
-		animation.setFillAfter(true);
-		animation.setDuration(300);
-		mSlide.startAnimation(animation);
-
-		setPageTitleColor(mCurrentPage);
+		/** Pager位置确定后，Slide image再滑动方式 */
+		// int from = mCurrentPage * SCREEN_WIDTH_PART_ONE;
+		// int to = mCurrentPage * SCREEN_WIDTH_PART_ONE;
+		// if ((position - mCurrentPage) > 0)
+		// {
+		// to += SCREEN_WIDTH_PART_ONE;
+		// } else
+		// {
+		// to -= SCREEN_WIDTH_PART_ONE;
+		// }
+		// Animation animation = new TranslateAnimation(from, to, 0, 0);
+		// mCurrentPage = position;
+		// animation.setFillAfter(true);
+		// animation.setDuration(300);
+		// mSlide.startAnimation(animation);
+		//
+		// setPageTitleColor(mViewPager.getCurrentItem());
+		/******************************************/
 	}
 
 	@Override
