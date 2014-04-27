@@ -14,12 +14,11 @@ import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MainActivity extends Activity implements ViewPager.OnPageChangeListener
+public class MainActivity extends Activity implements ViewPager.OnPageChangeListener,OnClickListener
 {
 
 	/** Context */
@@ -82,8 +81,11 @@ public class MainActivity extends Activity implements ViewPager.OnPageChangeList
 
 		// Init page title
 		mTitleOne = (TextView) findViewById(R.id.msg_title);
+		mTitleOne.setOnClickListener(this);
 		mTitleTwo = (TextView) findViewById(R.id.pic_title);
+		mTitleTwo.setOnClickListener(this);
 		mTitleThree = (TextView) findViewById(R.id.setting_title);
+		mTitleThree.setOnClickListener(this);
 
 		// Create child
 		mChilds = new ArrayList<View>(3);
@@ -201,5 +203,24 @@ public class MainActivity extends Activity implements ViewPager.OnPageChangeList
 	public void onPageScrollStateChanged(int state)
 	{
 
+	}
+
+	@Override
+	public void onClick(View v)
+	{
+		switch (v.getId())
+		{
+		case R.id.msg_title:
+			mViewPager.setCurrentItem(0);
+			break;
+		case R.id.pic_title:
+			mViewPager.setCurrentItem(1);
+			break;
+		case R.id.setting_title:
+			mViewPager.setCurrentItem(2);
+			break;
+		default:
+			break;
+		}
 	}
 }
