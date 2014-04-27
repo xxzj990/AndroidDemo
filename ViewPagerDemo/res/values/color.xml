@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="page_title_focus">#0066ff</color>
+    <color name="page_title">#666666</color>
+
+    <color name="white">#FFFFFF</color>
+</resources>

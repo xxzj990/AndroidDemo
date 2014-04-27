@@ -1,0 +1,72 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.xxzj990.androidthemetest.app.MainActivity">
+
+    <LinearLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/msg_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/page0_text" />
+
+        <TextView
+            android:id="@+id/pic_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/page1_text" />
+
+        <TextView
+            android:id="@+id/setting_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/page2_text" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/spl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title">
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignBottom="@+id/slide_img"
+            android:background="#D1D1D1" />
+
+        <ImageView
+            android:id="@+id/slide_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="matrix"
+            android:src="@drawable/bg_slide" />
+    </RelativeLayout>
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vPager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spl"
+        android:layout_gravity="center"
+        android:background="#FFFFFF"
+        android:flipInterval="30"
+        android:persistentDrawingCache="animation" />
+
+</RelativeLayout>
