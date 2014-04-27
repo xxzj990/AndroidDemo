@@ -146,8 +146,7 @@ public class MainActivity extends Activity implements ViewPager.OnPageChangeList
 	@Override
 	public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
 	{
-		Log.d("", "test p=" + position + ";offset=" + positionOffset + ";offsetPx="
-				+ positionOffsetPixels);
+
 	}
 
 	@Override
